@@ -1,0 +1,27 @@
+*{
+    margin: 0 ;
+    padding: 0;
+    outline: none;
+}
+header{
+    justify-content: center;
+    background-color: #b277d9;
+    text-align: center;
+
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+.left-column-wrapper {
+    width: 700px;
+    background-color: #6edfff;
+}
+.right-column-wrapper {
+    width: 700px;
+    background-color: #5690fa;
+}
+.middle-column-wrapper {
+    width: 700px;
+    background-color: #6056d0;
+}
