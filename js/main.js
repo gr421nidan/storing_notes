@@ -1,34 +1,35 @@
-Vue.component('formx', {
+Vue.component('forma', {
     template:
     `
-    <div class="content">
+   
+  <div class="content">
     <div class="left-column-wrapper">
         <div class="left-column">
             <br>
-            <form>
+             <form class="form_add_note">
+            
+<!--                <p>{{note}}</p>-->
+            <div>
+                
+                <input v-model="note" type="text" placeholder="Введите название"/>
+            </div>
                 <div>
-                    <label>Заголовок</label>
-                    <input type="text" placeholder="Введите название">
+                <label>Выберите:</label>
+                <input v-model="note" type="checkbox">  
+                <input v-model="note" type="checkbox"> 
+                <input v-model="note" type="checkbox"> 
+                <input v-model="note" type="checkbox">
+                <input v-model="note" type="checkbox">  
                 </div>
-                <div>
-                    <label>Выберите пункты</label>
-                    <input type="checkbox" name="1" class="button">
-                    <span>1</span>
-                    <input type="checkbox" name="2" class="button">
-                    <span>1</span>
-                    <input type="checkbox" name="3" class="button">
-                    <span>1</span>
-                    <input type="checkbox" name="4" class="button">
-                    <span>1</span>
-                    <input type="checkbox" name="5" class="button">
-                    <span>1</span>
-                    <div>
-                        <input type="submit">
+                  <button @click="addNote">Создать</button>
+                  <div class="card">
+                    <div v-for="(note, i) in notes" :key="i" >
+                    <span>{{i+1}}</span>
+                    <span>{{note}}</span>
                     </div>
-                    
-                </div>
-
-            </form>
+                   </div>
+                  
+             </form>
         </div>
     </div>
 
@@ -44,7 +45,32 @@ Vue.component('formx', {
         </div>
     </div>
 </div>`,
+    data(){
+        return{
+            note: "",
+            notes: [],
 
+        };
+    },
+    methods: {
+        addNote() {
+            if(this.note !== ''){
+                this.notes.push(this.note);
+            }
+
+            localStorage.setItem('notes', JSON.stringify(this.notes))
+            this.note=''
+        },
+
+
+    },
+    async mounted() {
+        const data = await localStorage.getItem('notes')
+        if (data){
+            this.notes = JSON.parse(data)
+        }
+
+    }
 });
 
 let app = new Vue({
